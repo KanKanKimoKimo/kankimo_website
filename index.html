@@ -22,15 +22,54 @@
         display: grid;
         place-items: center;
         padding: 32px 16px;
+        overflow-x: hidden;
       }
 
       main {
+        position: relative;
+        z-index: 1;
         width: min(100%, 760px);
         background: #ffe4e1;
         border: 2px solid #db7093;
         border-radius: 24px;
         box-shadow: 0 16px 40px rgba(219, 112, 147, 0.18);
         padding: clamp(28px, 6vw, 56px);
+        animation: card-pop 720ms cubic-bezier(0.2, 0.9, 0.25, 1.25) both;
+      }
+
+      .pop-animation {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .bubble,
+      .heart {
+        position: absolute;
+        display: block;
+        opacity: 0;
+      }
+
+      .bubble {
+        width: var(--size);
+        aspect-ratio: 1;
+        left: var(--left);
+        top: var(--top);
+        border: 2px solid rgba(219, 112, 147, 0.46);
+        border-radius: 50%;
+        background: rgba(255, 228, 225, 0.5);
+        animation: float-pop var(--duration) ease-out var(--delay) both;
+      }
+
+      .heart {
+        left: var(--left);
+        top: var(--top);
+        color: #db7093;
+        font-size: var(--size);
+        line-height: 1;
+        transform-origin: center;
+        animation: heart-bounce var(--duration) ease-out var(--delay) both;
       }
 
       .profile {
@@ -46,10 +85,12 @@
         display: block;
         justify-self: center;
         background: transparent;
+        animation: image-bounce 900ms cubic-bezier(0.2, 0.9, 0.25, 1.25) 180ms both;
       }
 
       .profile-text {
         text-align: center;
+        animation: fade-slide 560ms ease-out 520ms both;
       }
 
       h1 {
@@ -75,6 +116,19 @@
         border-top: 1px solid rgba(219, 112, 147, 0.35);
         padding-top: 18px;
         text-align: center;
+        animation: fade-slide 520ms ease-out both;
+      }
+
+      section:nth-child(1) {
+        animation-delay: 700ms;
+      }
+
+      section:nth-child(2) {
+        animation-delay: 860ms;
+      }
+
+      section:nth-child(3) {
+        animation-delay: 1020ms;
       }
 
       h2 {
@@ -98,19 +152,113 @@
         text-align: left;
       }
 
+      @keyframes card-pop {
+        from {
+          opacity: 0;
+          transform: translateY(22px) scale(0.92) rotate(-1deg);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(0);
+        }
+      }
+
+      @keyframes image-bounce {
+        0% {
+          opacity: 0;
+          transform: translateY(-24px) scale(0.82) rotate(4deg);
+        }
+
+        62% {
+          opacity: 1;
+          transform: translateY(4px) scale(1.04) rotate(-2deg);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(0);
+        }
+      }
+
+      @keyframes fade-slide {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float-pop {
+        0% {
+          opacity: 0;
+          transform: translateY(24px) scale(0.3);
+        }
+
+        30% {
+          opacity: 0.85;
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateY(-90px) scale(1.25);
+        }
+      }
+
+      @keyframes heart-bounce {
+        0% {
+          opacity: 0;
+          transform: translateY(26px) scale(0.2) rotate(-18deg);
+        }
+
+        35% {
+          opacity: 0.9;
+          transform: translateY(0) scale(1.2) rotate(8deg);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateY(-86px) scale(0.9) rotate(24deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 1ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
     </style>
   </head>
   <body>
+    <div class="pop-animation" aria-hidden="true">
+      <span class="bubble" style="--left: 8%; --top: 76%; --size: 38px; --duration: 1.7s; --delay: 80ms;"></span>
+      <span class="bubble" style="--left: 18%; --top: 24%; --size: 24px; --duration: 1.45s; --delay: 380ms;"></span>
+      <span class="bubble" style="--left: 78%; --top: 72%; --size: 42px; --duration: 1.75s; --delay: 180ms;"></span>
+      <span class="bubble" style="--left: 88%; --top: 30%; --size: 28px; --duration: 1.5s; --delay: 560ms;"></span>
+      <span class="heart" style="--left: 13%; --top: 56%; --size: 28px; --duration: 1.8s; --delay: 220ms;">♥</span>
+      <span class="heart" style="--left: 82%; --top: 50%; --size: 34px; --duration: 1.9s; --delay: 420ms;">♥</span>
+      <span class="heart" style="--left: 46%; --top: 82%; --size: 24px; --duration: 1.55s; --delay: 620ms;">♥</span>
+    </div>
+
     <main>
       <div class="profile">
         <img
           class="profile-image"
           src="assets/profile.png"
-          alt="かんきものプロフィール画像"
+          alt="かのこのプロフィール画像"
         >
 
         <div class="profile-text">
-          <h1>かんきも</h1>
+          <h1>かのこ</h1>
           <p class="lead">18歳</p>
         </div>
       </div>
