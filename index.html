@@ -8,8 +8,8 @@
       :root {
         color-scheme: light;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #db7093;
-        background: #ffc0cb;
+        color: #8a5f6c;
+        background: #ffd8e2;
       }
 
       * {
@@ -20,21 +20,44 @@
         margin: 0;
         min-height: 100vh;
         display: grid;
-        place-items: center;
-        padding: 32px 16px;
+        place-items: start center;
+        padding: 48px 16px;
         overflow-x: hidden;
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.78) 0 14px, transparent 15px),
+          #ffd8e2;
+        background-position: 0 0, 0 0;
+        background-size: 60px 60px, auto;
       }
 
       main {
         position: relative;
         z-index: 1;
         width: min(100%, 760px);
-        background: #ffe4e1;
-        border: 2px solid #db7093;
-        border-radius: 24px;
-        box-shadow: 0 16px 40px rgba(219, 112, 147, 0.18);
-        padding: clamp(28px, 6vw, 56px);
+        display: grid;
+        gap: 28px;
         animation: card-pop 720ms cubic-bezier(0.2, 0.9, 0.25, 1.25) both;
+      }
+
+      .content-card {
+        position: relative;
+        overflow: hidden;
+        background: #fff0f4;
+        border: 3px solid #e9a3b8;
+        border-radius: 22px;
+        box-shadow:
+          0 12px 0 #d889a1,
+          0 24px 34px rgba(173, 77, 112, 0.16);
+        padding: clamp(28px, 6vw, 52px);
+      }
+
+      .content-card::after {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 2px dashed rgba(219, 112, 147, 0.24);
+        border-radius: 16px;
+        pointer-events: none;
       }
 
       .pop-animation {
@@ -56,25 +79,141 @@
         aspect-ratio: 1;
         left: var(--left);
         top: var(--top);
-        border: 2px solid rgba(219, 112, 147, 0.46);
+        border: 2px solid rgba(255, 255, 255, 0.7);
         border-radius: 50%;
-        background: rgba(255, 228, 225, 0.5);
+        background: rgba(255, 255, 255, 0.42);
         animation: float-pop var(--duration) ease-out var(--delay) both;
       }
 
       .heart {
         left: var(--left);
         top: var(--top);
-        color: #db7093;
+        color: #e9a3b8;
         font-size: var(--size);
         line-height: 1;
         transform-origin: center;
         animation: heart-bounce var(--duration) ease-out var(--delay) both;
       }
 
+      .scene-decor {
+        position: fixed;
+        inset: auto 0 20px;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+        perspective: 640px;
+      }
+
+      .island {
+        position: relative;
+        width: min(86vw, 620px);
+        height: 180px;
+        transform: rotateX(58deg) rotateZ(-8deg);
+        transform-style: preserve-3d;
+      }
+
+      .island-base {
+        position: absolute;
+        inset: 30px 24px 16px;
+        border-radius: 46% 52% 48% 50%;
+        background:
+          radial-gradient(circle at 34% 38%, #fff0f4 0 20px, transparent 21px),
+          radial-gradient(circle at 63% 55%, #ffe1ea 0 16px, transparent 17px),
+          #f6bed0;
+        box-shadow:
+          0 14px 0 #e4a1b6,
+          0 26px 28px rgba(136, 68, 92, 0.18);
+      }
+
+      .tree {
+        position: absolute;
+        width: 58px;
+        height: 98px;
+        transform-style: preserve-3d;
+        transform: translateZ(44px) rotateX(-58deg) rotateZ(8deg);
+      }
+
+      .tree::before {
+        content: "";
+        position: absolute;
+        left: 24px;
+        bottom: 0;
+        width: 12px;
+        height: 38px;
+        border-radius: 6px;
+        background: linear-gradient(90deg, #9c6b3f, #c58a52);
+        box-shadow: 0 5px 8px rgba(73, 56, 31, 0.22);
+      }
+
+      .tree::after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        bottom: 28px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 34% 28%, #ffe2ea 0 13px, transparent 14px),
+          radial-gradient(circle at 62% 36%, #f8bdd0 0 18px, transparent 19px),
+          #e9a3b8;
+        box-shadow:
+          inset -8px -10px 0 rgba(178, 73, 111, 0.14),
+          0 10px 12px rgba(128, 61, 84, 0.16);
+      }
+
+      .tree.one {
+        left: 14%;
+        top: 24px;
+      }
+
+      .tree.two {
+        right: 14%;
+        top: 46px;
+        transform: translateZ(50px) rotateX(-58deg) rotateZ(8deg) scale(0.86);
+      }
+
+      .home-block {
+        position: absolute;
+        left: 45%;
+        top: 42px;
+        width: 96px;
+        height: 76px;
+        transform: translateZ(40px) rotateX(-58deg) rotateZ(8deg);
+        transform-style: preserve-3d;
+      }
+
+      .home-block::before {
+        content: "";
+        position: absolute;
+        left: 16px;
+        bottom: 0;
+        width: 64px;
+        height: 48px;
+        border-radius: 8px 8px 6px 6px;
+        background: #fff1c7;
+        box-shadow:
+          inset -8px 0 0 rgba(224, 172, 94, 0.18),
+          0 8px 14px rgba(92, 73, 42, 0.18);
+      }
+
+      .home-block::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        bottom: 38px;
+        width: 80px;
+        height: 34px;
+        border-radius: 12px 12px 4px 4px;
+        background: linear-gradient(135deg, #ffd3df, #e9a3b8);
+        transform: skewX(-12deg);
+        box-shadow: 0 8px 0 rgba(173, 77, 112, 0.16);
+      }
+
       .profile {
         display: grid;
-        gap: 28px;
+        gap: 22px;
         align-items: center;
         text-align: center;
       }
@@ -85,6 +224,7 @@
         display: block;
         justify-self: center;
         background: transparent;
+        filter: drop-shadow(0 12px 0 rgba(219, 112, 147, 0.12)) drop-shadow(0 18px 18px rgba(128, 61, 84, 0.14));
         animation: image-bounce 900ms cubic-bezier(0.2, 0.9, 0.25, 1.25) 180ms both;
       }
 
@@ -93,7 +233,16 @@
         animation: fade-slide 560ms ease-out 520ms both;
       }
 
-      h1 {
+      .section-title {
+        margin: 0 0 24px;
+        color: #d889a1;
+        font-size: clamp(1.35rem, 5vw, 2rem);
+        line-height: 1.2;
+        text-align: center;
+        text-shadow: 0 2px 0 rgba(255, 255, 255, 0.82);
+      }
+
+      .profile-name {
         margin: 0 0 10px;
         font-size: clamp(1rem, 3.5vw, 1.75rem);
         line-height: 1.1;
@@ -101,7 +250,7 @@
 
       .lead {
         margin: 0;
-        color: #db7093;
+        color: #8a5f6c;
         font-size: 1.092rem;
         line-height: 1.8;
       }
@@ -112,28 +261,56 @@
         margin-top: 36px;
       }
 
-      section {
-        border-top: 1px solid rgba(219, 112, 147, 0.35);
-        padding-top: 18px;
+      .detail-item {
+        position: relative;
+        padding-top: 32px;
         text-align: center;
         animation: fade-slide 520ms ease-out both;
       }
 
-      section:nth-child(1) {
+      .detail-item::before {
+        content: "";
+        position: absolute;
+        top: 9px;
+        left: 50%;
+        width: min(100%, 360px);
+        height: 8px;
+        transform: translateX(-50%);
+        background-image: radial-gradient(circle, rgba(219, 112, 147, 0.36) 0 2px, transparent 2.5px);
+        background-size: 12px 8px;
+        background-repeat: repeat-x;
+        background-position: center;
+      }
+
+      .detail-item::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        width: min(100%, 360px);
+        height: 8px;
+        transform: translateX(-50%);
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.76) 0 1.25px, transparent 1.75px);
+        background-size: 24px 8px;
+        background-repeat: repeat-x;
+        background-position: 6px center;
+      }
+
+      .detail-item:nth-child(1) {
         animation-delay: 700ms;
       }
 
-      section:nth-child(2) {
+      .detail-item:nth-child(2) {
         animation-delay: 860ms;
       }
 
-      section:nth-child(3) {
+      .detail-item:nth-child(3) {
         animation-delay: 1020ms;
       }
 
       h2 {
         margin: 0 0 8px;
-        color: #db7093;
+        color: #d889a1;
         font-size: 1.17rem;
         letter-spacing: 0;
       }
@@ -141,7 +318,7 @@
       p,
       ul {
         margin: 0;
-        color: #db7093;
+        color: #8a5f6c;
         font-size: 1.092rem;
         line-height: 1.8;
       }
@@ -150,6 +327,428 @@
         display: inline-block;
         padding-left: 1.2em;
         text-align: left;
+      }
+
+      .game-button {
+        min-width: 112px;
+        border: 2px solid #e9a3b8;
+        border-radius: 8px;
+        background: #e9a3b8;
+        color: #fff;
+        padding: 10px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 5px 0 #d889a1;
+      }
+
+      .game-button.secondary {
+        background: #fff8df;
+        color: #d889a1;
+      }
+
+      .fruit-wallet {
+        display: inline-grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: fit-content;
+        margin: 0 auto;
+        border: 2px solid rgba(219, 112, 147, 0.26);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.62);
+        padding: 8px 14px;
+        color: #8a5f6c;
+        font-weight: 700;
+        box-shadow: 0 5px 0 rgba(219, 112, 147, 0.12);
+      }
+
+      .fruit-icon {
+        width: 24px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 35% 30%, #ffe2ea 0 5px, transparent 6px),
+          #e9a3b8;
+        box-shadow:
+          inset -4px -5px 0 rgba(195, 102, 131, 0.24),
+          0 3px 0 rgba(173, 77, 112, 0.22);
+      }
+
+      .flappy-field {
+        position: relative;
+        width: min(100%, 440px);
+        height: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 3px solid #e9a3b8;
+        border-radius: 14px;
+        background:
+          radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.5) 0 18px, transparent 19px),
+          radial-gradient(circle at 78% 68%, rgba(255, 255, 255, 0.42) 0 22px, transparent 23px),
+          #ffd8e2;
+        box-shadow:
+          inset 0 -10px 0 rgba(219, 112, 147, 0.1),
+          0 8px 0 rgba(216, 137, 161, 0.42);
+        touch-action: manipulation;
+        cursor: pointer;
+      }
+
+      .flappy-ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 3;
+        display: grid;
+        gap: 6px;
+        color: #8a5f6c;
+        font-size: 0.78rem;
+        font-weight: 800;
+        line-height: 1.2;
+        text-align: left;
+      }
+
+      .flappy-ui span {
+        display: inline-block;
+        border: 2px solid rgba(219, 112, 147, 0.24);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        padding: 5px 9px;
+      }
+
+      .flappy-player {
+        position: absolute;
+        left: 72px;
+        top: 130px;
+        z-index: 2;
+        width: 42px;
+        height: 32px;
+        border-radius: 55% 48% 48% 55%;
+        background: #e9a3b8;
+        box-shadow:
+          inset -6px -5px 0 rgba(195, 102, 131, 0.28),
+          0 5px 0 rgba(173, 77, 112, 0.2);
+      }
+
+      .flappy-player::before,
+      .flappy-player::after {
+        content: "";
+        position: absolute;
+      }
+
+      .flappy-player::before {
+        left: -9px;
+        top: 10px;
+        width: 22px;
+        height: 15px;
+        border-radius: 60% 20% 60% 30%;
+        background: #f6bed0;
+        box-shadow: inset -4px -3px 0 rgba(195, 102, 131, 0.18);
+        transform: rotate(-24deg);
+      }
+
+      .flappy-player::after {
+        right: 8px;
+        top: 9px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #6f4d55;
+        box-shadow: 15px 5px 0 -1px #f3bd72;
+      }
+
+      .flappy-pipe {
+        position: absolute;
+        z-index: 1;
+        width: 48px;
+        border-radius: 10px;
+        background: #fff8df;
+        box-shadow:
+          inset -7px 0 0 rgba(216, 137, 161, 0.16),
+          0 5px 0 rgba(216, 137, 161, 0.18);
+      }
+
+      .collectible-fruit {
+        position: absolute;
+        z-index: 2;
+        width: 24px;
+        aspect-ratio: 1;
+        border: 2px solid #e9a3b8;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 34% 28%, #ffe2ea 0 12px, transparent 13px),
+          #e9a3b8;
+        box-shadow:
+          inset -4px -5px 0 rgba(195, 102, 131, 0.22),
+          0 4px 0 rgba(216, 137, 161, 0.4);
+      }
+
+      .collectible-fruit::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        width: 10px;
+        height: 8px;
+        border-radius: 50% 0 50% 0;
+        background: #9bc878;
+        transform: translateX(-10%) rotate(-18deg);
+      }
+
+      .flappy-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .fruit-message {
+        min-height: 1.8em;
+        text-align: center;
+      }
+
+      .othello-wallet {
+        justify-self: center;
+      }
+
+      .game-section {
+        position: relative;
+      }
+
+      .game-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: min(100%, 420px);
+        height: 10px;
+        transform: translateX(-50%);
+        background-image: radial-gradient(circle, rgba(219, 112, 147, 0.34) 0 2px, transparent 2.5px);
+        background-repeat: repeat-x;
+        background-size: 12px 10px;
+        background-position: center;
+      }
+
+      .game-panel {
+        display: grid;
+        gap: 18px;
+      }
+
+      .player-panel {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 12px;
+        border: 2px solid rgba(219, 112, 147, 0.26);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.58);
+        padding: 10px 12px;
+        box-shadow: 0 5px 0 rgba(219, 112, 147, 0.12);
+      }
+
+      .player-panel.active {
+        border-color: #e9a3b8;
+        background: rgba(255, 255, 255, 0.78);
+      }
+
+      .piece-sample {
+        width: 28px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        display: block;
+      }
+
+      .piece-sample.white {
+        background: #fff;
+        box-shadow:
+          inset -4px -5px 0 rgba(222, 202, 208, 0.55),
+          0 3px 0 rgba(188, 156, 166, 0.28);
+      }
+
+      .piece-sample.pink {
+        background: #e9a3b8;
+        box-shadow:
+          inset -4px -5px 0 rgba(195, 102, 131, 0.32),
+          0 3px 0 rgba(173, 77, 112, 0.25);
+      }
+
+      .player-name {
+        display: block;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .player-count {
+        color: #8a5f6c;
+        font-size: 0.92rem;
+      }
+
+      .turn-pill {
+        border-radius: 999px;
+        background: rgba(216, 137, 161, 0.18);
+        color: #8a5f6c;
+        font-size: 0.86rem;
+        font-weight: 700;
+        padding: 6px 10px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .board-stage {
+        position: relative;
+        width: min(100%, 440px);
+        margin: 0 auto;
+      }
+
+      .othello-board {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 4px;
+        width: 100%;
+        aspect-ratio: 1;
+        border: 3px solid #e9a3b8;
+        border-radius: 14px;
+        background:
+          radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.45) 0 16px, transparent 17px),
+          radial-gradient(circle at 82% 72%, rgba(255, 255, 255, 0.38) 0 20px, transparent 21px),
+          #ffd8e2;
+        box-shadow:
+          inset 0 -10px 0 rgba(219, 112, 147, 0.1),
+          0 8px 0 rgba(216, 137, 161, 0.42);
+        padding: 8px;
+      }
+
+      .othello-cell {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-width: 0;
+        border: 1px solid rgba(219, 112, 147, 0.2);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.36);
+        cursor: pointer;
+      }
+
+      .othello-cell:disabled {
+        cursor: default;
+      }
+
+      .othello-cell::before {
+        content: "";
+        width: 76%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+      }
+
+      .othello-cell.white::before {
+        background: #fff;
+        box-shadow:
+          inset -5px -6px 0 rgba(222, 202, 208, 0.55),
+          0 4px 0 rgba(188, 156, 166, 0.28);
+        transform: scale(1);
+      }
+
+      .othello-cell.pink::before {
+        background: #e9a3b8;
+        box-shadow:
+          inset -5px -6px 0 rgba(195, 102, 131, 0.32),
+          0 4px 0 rgba(173, 77, 112, 0.25);
+        transform: scale(1);
+      }
+
+      .othello-cell.legal::after {
+        content: "";
+        position: absolute;
+        width: 28%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 0 0 2px rgba(216, 137, 161, 0.38);
+      }
+
+      .othello-cell:focus-visible {
+        outline: 3px solid rgba(219, 112, 147, 0.28);
+        outline-offset: 2px;
+      }
+
+      .game-button:focus-visible {
+        outline: 3px solid rgba(219, 112, 147, 0.28);
+        outline-offset: 3px;
+      }
+
+      .game-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .game-button:disabled {
+        cursor: default;
+        opacity: 0.62;
+      }
+
+      .game-message {
+        min-height: 1.8em;
+        text-align: center;
+      }
+
+      .result-popout {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        width: min(82%, 300px);
+        border: 2px solid #e9a3b8;
+        border-radius: 10px;
+        background: rgba(255, 248, 253, 0.94);
+        box-shadow:
+          0 6px 0 rgba(216, 137, 161, 0.78),
+          0 14px 24px rgba(128, 61, 84, 0.18);
+        padding: 14px 16px;
+        text-align: center;
+      }
+
+      .result-popout.show {
+        display: grid;
+        gap: 8px;
+        animation: result-pop 520ms cubic-bezier(0.2, 0.9, 0.25, 1.28) both;
+      }
+
+      .result-popout.lose {
+        background: rgba(250, 238, 244, 0.94);
+      }
+
+      .result-title {
+        color: #d889a1;
+        font-size: clamp(1.15rem, 4.5vw, 1.6rem);
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .result-score {
+        color: #8a5f6c;
+        font-size: 0.96rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 520px) {
+        .othello-board {
+          gap: 3px;
+          padding: 6px;
+        }
+
+        .player-panel {
+          grid-template-columns: auto 1fr;
+        }
+
+        .turn-pill {
+          grid-column: 1 / -1;
+        }
       }
 
       @keyframes card-pop {
@@ -226,6 +825,23 @@
         }
       }
 
+      @keyframes result-pop {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.76);
+        }
+
+        58% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -249,40 +865,737 @@
       <span class="heart" style="--left: 46%; --top: 82%; --size: 24px; --duration: 1.55s; --delay: 620ms;">♥</span>
     </div>
 
+    <div class="scene-decor" aria-hidden="true">
+      <div class="island">
+        <div class="island-base"></div>
+        <div class="tree one"></div>
+        <div class="home-block"></div>
+        <div class="tree two"></div>
+      </div>
+    </div>
+
     <main>
-      <div class="profile">
-        <img
-          class="profile-image"
-          src="assets/profile.png"
-          alt="かのこのプロフィール画像"
-        >
+      <section class="content-card intro-section" aria-labelledby="intro-title">
+        <h1 class="section-title" id="intro-title">かのこのプロフィール</h1>
 
-        <div class="profile-text">
-          <h1>かのこ</h1>
-          <p class="lead">18歳</p>
+        <div class="profile">
+          <img
+            class="profile-image"
+            src="assets/profile.png"
+            alt="かのこのプロフィール画像"
+          >
+
+          <div class="profile-text">
+            <h2 class="profile-name">かのこ</h2>
+          </div>
         </div>
-      </div>
 
-      <div class="details">
-        <section>
-          <h2>誕生日</h2>
-          <p>2007/10/10</p>
-        </section>
+        <div class="details">
+          <div class="detail-item">
+            <h2>誕生日</h2>
+            <p>2007/10/10</p>
+          </div>
 
-        <section>
-          <h2>好きなもの</h2>
-          <ul>
-            <li>ちいかわ</li>
-            <li>中華</li>
-            <li>家族</li>
-          </ul>
-        </section>
+          <div class="detail-item">
+            <h2>好きなもの</h2>
+            <ul>
+              <li>ちいかわ</li>
+              <li>中華</li>
+              <li>家族</li>
+            </ul>
+          </div>
 
-        <section>
-          <h2>一言コメント</h2>
-          <p>やほー！！！</p>
-        </section>
-      </div>
+          <div class="detail-item">
+            <h2>一言コメント</h2>
+            <p>やほー！！！</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-card game-section" aria-labelledby="harvest-title">
+        <h2 class="section-title" id="harvest-title">ピンクの実フライト</h2>
+
+        <div class="game-panel">
+          <div class="fruit-wallet">
+            <span class="fruit-icon" aria-hidden="true"></span>
+            <span>ピンクの実 <span data-fruit-count>10</span>個</span>
+          </div>
+
+          <div class="flappy-field" id="jumpField" tabindex="0" aria-label="ピンクの実フライトゲーム">
+            <div class="flappy-ui" aria-live="polite">
+              <span>SCORE <span id="jumpScore">0</span></span>
+              <span>TIME <span id="jumpTime">25</span></span>
+            </div>
+            <div class="flappy-player" id="jumpPlayer" aria-hidden="true"></div>
+          </div>
+
+          <div class="flappy-controls">
+            <button class="game-button" id="startJumpGame" type="button">スタート</button>
+          </div>
+
+          <p class="fruit-message" id="fruitMessage">スタート後、画面タッチでジャンプします。</p>
+        </div>
+      </section>
+
+      <section class="content-card game-section" aria-labelledby="game-title">
+        <h2 class="section-title" id="game-title">オセロ対決</h2>
+
+        <div class="game-panel">
+          <div class="player-panel opponent" id="kanokoPanel" aria-live="polite">
+            <span class="piece-sample white" aria-hidden="true"></span>
+            <div>
+              <span class="player-name">かのこ</span>
+              <span class="player-count">白 <span id="whiteCount">2</span>枚</span>
+            </div>
+            <span class="turn-pill" id="kanokoTurn">待機中</span>
+          </div>
+
+          <div class="board-stage">
+            <div class="othello-board" id="othelloBoard" aria-label="オセロ盤"></div>
+
+            <div class="result-popout" id="resultPopout" aria-live="polite" aria-hidden="true">
+              <div class="result-title" id="resultTitle"></div>
+              <div class="result-score" id="resultScore"></div>
+            </div>
+          </div>
+
+          <div class="player-panel user" id="userPanel" aria-live="polite">
+            <span class="piece-sample pink" aria-hidden="true"></span>
+            <div>
+              <span class="player-name">あなた</span>
+              <span class="player-count">ピンク <span id="pinkCount">2</span>枚</span>
+            </div>
+            <span class="turn-pill" id="userTurn">あなたの番</span>
+          </div>
+
+          <div class="game-controls">
+            <button class="game-button" id="startOthello" type="button">10個で開始</button>
+            <button class="game-button secondary" id="resetGame" type="button">中止</button>
+          </div>
+
+          <div class="fruit-wallet othello-wallet">
+            <span class="fruit-icon" aria-hidden="true"></span>
+            <span>所持している実 <span data-fruit-count>10</span>個</span>
+          </div>
+
+          <p class="game-message" id="gameMessage">ピンクの実を10個使って対戦できます。</p>
+
+        </div>
+      </section>
     </main>
+
+    <script>
+      const fruitCountDisplays = document.querySelectorAll("[data-fruit-count]");
+      const jumpField = document.querySelector("#jumpField");
+      const jumpPlayer = document.querySelector("#jumpPlayer");
+      const jumpScore = document.querySelector("#jumpScore");
+      const jumpTime = document.querySelector("#jumpTime");
+      const startJumpGameButton = document.querySelector("#startJumpGame");
+      const fruitMessage = document.querySelector("#fruitMessage");
+      const kanokoPanel = document.querySelector("#kanokoPanel");
+      const userPanel = document.querySelector("#userPanel");
+      const othelloBoard = document.querySelector("#othelloBoard");
+      const startOthelloButton = document.querySelector("#startOthello");
+      const resetButton = document.querySelector("#resetGame");
+      const whiteCount = document.querySelector("#whiteCount");
+      const pinkCount = document.querySelector("#pinkCount");
+      const kanokoTurn = document.querySelector("#kanokoTurn");
+      const userTurn = document.querySelector("#userTurn");
+      const gameMessage = document.querySelector("#gameMessage");
+      const resultPopout = document.querySelector("#resultPopout");
+      const resultTitle = document.querySelector("#resultTitle");
+      const resultScore = document.querySelector("#resultScore");
+      const fruitStorageKey = "kankimoPinkFruits";
+      const othelloCost = 10;
+
+      window.requestAnimationFrame = window.requestAnimationFrame || ((callback) => window.setTimeout(callback, 16));
+      window.cancelAnimationFrame = window.cancelAnimationFrame || window.clearTimeout;
+
+      const empty = "";
+      const userPiece = "pink";
+      const aiPiece = "white";
+      const boardSize = 8;
+      const directions = [
+        [-1, -1],
+        [-1, 0],
+        [-1, 1],
+        [0, -1],
+        [0, 1],
+        [1, -1],
+        [1, 0],
+        [1, 1],
+      ];
+      const squareWeights = [
+        [120, -24, 20, 5, 5, 20, -24, 120],
+        [-24, -48, -4, -4, -4, -4, -48, -24],
+        [20, -4, 15, 3, 3, 15, -4, 20],
+        [5, -4, 3, 3, 3, 3, -4, 5],
+        [5, -4, 3, 3, 3, 3, -4, 5],
+        [20, -4, 15, 3, 3, 15, -4, 20],
+        [-24, -48, -4, -4, -4, -4, -48, -24],
+        [120, -24, 20, 5, 5, 20, -24, 120],
+      ];
+
+      let board = [];
+      let currentPlayer = userPiece;
+      let aiThinking = false;
+      let resultTimeoutId;
+      let fruitBalance = 10;
+      let othelloActive = false;
+      let othelloStakeInPlay = false;
+      let jumpGameRunning = false;
+      let jumpGameStarted = false;
+      let jumpGameLoopId;
+      let jumpTimerId;
+      let jumpState = {
+        y: 130,
+        vy: 0,
+        time: 25,
+        fruits: [],
+        pipes: [],
+        score: 0,
+      };
+      const flappyConfig = {
+        time: 25,
+        reward: 6,
+        speed: 2.5,
+        gap: 112,
+        pipeSpacing: 146,
+        target: 6,
+      };
+
+      function loadFruitBalance() {
+        const savedFruits = localStorage.getItem(fruitStorageKey);
+        const parsedFruits = Number(savedFruits);
+
+        fruitBalance = savedFruits !== null && Number.isFinite(parsedFruits) && parsedFruits >= 0 ? parsedFruits : 10;
+        updateFruitDisplays();
+      }
+
+      function updateFruitDisplays() {
+        fruitCountDisplays.forEach((display) => {
+          display.textContent = fruitBalance;
+        });
+
+        startOthelloButton.disabled = othelloActive || fruitBalance < othelloCost;
+      }
+
+      function changeFruitBalance(amount) {
+        fruitBalance = Math.max(0, fruitBalance + amount);
+        localStorage.setItem(fruitStorageKey, String(fruitBalance));
+        updateFruitDisplays();
+      }
+
+      function clearJumpStageElements() {
+        jumpField.querySelectorAll(".flappy-pipe, .collectible-fruit").forEach((element) => element.remove());
+      }
+
+      function updateJumpHud() {
+        jumpScore.textContent = jumpState.score;
+        jumpTime.textContent = jumpState.time;
+      }
+
+      function positionJumpActors() {
+        jumpPlayer.style.top = `${jumpState.y}px`;
+      }
+
+      function createFlappyPair(index, config) {
+        const gapTop = 54 + ((index * 63 + 19) % 96);
+        return {
+          x: 470 + index * config.pipeSpacing,
+          gapTop,
+          gap: config.gap,
+          scored: false,
+          fruitCollected: false,
+        };
+      }
+
+      function prepareJumpStage() {
+        jumpState = {
+          y: 130,
+          vy: 0,
+          time: flappyConfig.time,
+          fruits: [],
+          pipes: Array.from({ length: flappyConfig.target }, (_, index) => createFlappyPair(index, flappyConfig)),
+          score: 0,
+        };
+        updateJumpHud();
+        renderJumpStage();
+        positionJumpActors();
+      }
+
+      function renderJumpStage() {
+        clearJumpStageElements();
+
+        jumpState.pipes.forEach((pipe, index) => {
+          const topPipe = document.createElement("span");
+          const bottomPipe = document.createElement("span");
+          const fruit = document.createElement("span");
+
+          topPipe.className = "flappy-pipe";
+          topPipe.dataset.index = index;
+          topPipe.style.left = `${pipe.x}px`;
+          topPipe.style.top = "0px";
+          topPipe.style.height = `${pipe.gapTop}px`;
+
+          bottomPipe.className = "flappy-pipe";
+          bottomPipe.dataset.index = index;
+          bottomPipe.style.left = `${pipe.x}px`;
+          bottomPipe.style.top = `${pipe.gapTop + pipe.gap}px`;
+          bottomPipe.style.height = `${300 - pipe.gapTop - pipe.gap}px`;
+
+          fruit.className = "collectible-fruit";
+          fruit.dataset.fruitIndex = index;
+          fruit.style.left = `${pipe.x + 12}px`;
+          fruit.style.top = `${pipe.gapTop + pipe.gap / 2 - 12}px`;
+          fruit.hidden = pipe.fruitCollected;
+
+          jumpField.append(topPipe);
+          jumpField.append(bottomPipe);
+          jumpField.append(fruit);
+        });
+      }
+
+      function endJumpGame(cleared) {
+        jumpGameRunning = false;
+        jumpGameStarted = false;
+        window.clearInterval(jumpTimerId);
+        window.cancelAnimationFrame?.(jumpGameLoopId);
+        startJumpGameButton.disabled = false;
+
+        if (!cleared) {
+          if (jumpState.score > 0) {
+            changeFruitBalance(jumpState.score);
+            fruitMessage.textContent = `ゲームオーバーです。ピンクの実を${jumpState.score}個獲得しました。`;
+          } else {
+            fruitMessage.textContent = "ゲームオーバーです。ピンクの実は獲得できませんでした。";
+          }
+          return;
+        }
+
+        const timeBonus = jumpState.time >= 10 ? 2 : 0;
+        const reward = flappyConfig.reward + jumpState.score + timeBonus;
+
+        changeFruitBalance(reward);
+        fruitMessage.textContent = `クリア！ピンクの実を${reward}個獲得しました。`;
+      }
+
+      function isOverlapping(a, b) {
+        return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+      }
+
+      function updateJumpGame() {
+        if (!jumpGameRunning) {
+          return;
+        }
+
+        jumpState.vy += 0.28;
+        jumpState.y += jumpState.vy;
+        const playerRect = { x: 72, y: jumpState.y, w: 38, h: 30 };
+
+        if (jumpState.y < 0 || jumpState.y > 270) {
+          endJumpGame(false);
+          return;
+        }
+
+        jumpState.pipes.forEach((pipe) => {
+          pipe.x -= flappyConfig.speed;
+
+          const topPipe = { x: pipe.x, y: 0, w: 48, h: pipe.gapTop };
+          const bottomPipe = { x: pipe.x, y: pipe.gapTop + pipe.gap, w: 48, h: 300 - pipe.gapTop - pipe.gap };
+          const fruitRect = { x: pipe.x + 12, y: pipe.gapTop + pipe.gap / 2 - 12, w: 24, h: 24 };
+
+          if (isOverlapping(playerRect, topPipe) || isOverlapping(playerRect, bottomPipe)) {
+            endJumpGame(false);
+            return;
+          }
+
+          if (!pipe.fruitCollected && isOverlapping(playerRect, fruitRect)) {
+            pipe.fruitCollected = true;
+            jumpState.score += 1;
+            updateJumpHud();
+          }
+
+          if (!pipe.scored && pipe.x + 48 < 72) {
+            pipe.scored = true;
+          }
+        });
+
+        if (!jumpGameRunning) {
+          return;
+        }
+
+        if (jumpState.score >= flappyConfig.target) {
+          endJumpGame(true);
+          return;
+        }
+
+        renderJumpStage();
+        positionJumpActors();
+        jumpGameLoopId = window.requestAnimationFrame(updateJumpGame);
+      }
+
+      function jumpPlayerAction() {
+        if (!jumpGameRunning) {
+          return;
+        }
+
+        if (!jumpGameStarted) {
+          jumpGameStarted = true;
+          fruitMessage.textContent = "ピンクの実を集めてください。";
+          window.clearInterval(jumpTimerId);
+          jumpTimerId = window.setInterval(() => {
+            if (!jumpGameRunning || !jumpGameStarted) {
+              return;
+            }
+
+            jumpState.time -= 1;
+            updateJumpHud();
+
+            if (jumpState.time <= 0) {
+              endJumpGame(false);
+            }
+          }, 1000);
+          jumpGameLoopId = window.requestAnimationFrame(updateJumpGame);
+        }
+
+        jumpState.vy = -5.2;
+      }
+
+      function startJumpGame() {
+        if (jumpGameRunning) {
+          return;
+        }
+
+        prepareJumpStage();
+        jumpGameRunning = true;
+        jumpGameStarted = false;
+        startJumpGameButton.disabled = true;
+        fruitMessage.textContent = "画面をタッチするとスタートします。";
+        jumpField.focus();
+        window.clearInterval(jumpTimerId);
+        window.cancelAnimationFrame?.(jumpGameLoopId);
+      }
+
+      function createEmptyBoard() {
+        return Array.from({ length: boardSize }, () => Array(boardSize).fill(empty));
+      }
+
+      function getOpponent(piece) {
+        return piece === userPiece ? aiPiece : userPiece;
+      }
+
+      function isInsideBoard(row, col) {
+        return row >= 0 && row < boardSize && col >= 0 && col < boardSize;
+      }
+
+      function getFlipsForMove(targetBoard, row, col, piece) {
+        if (targetBoard[row][col] !== empty) {
+          return [];
+        }
+
+        const opponent = getOpponent(piece);
+        const flips = [];
+
+        directions.forEach(([rowDirection, colDirection]) => {
+          const line = [];
+          let nextRow = row + rowDirection;
+          let nextCol = col + colDirection;
+
+          while (isInsideBoard(nextRow, nextCol) && targetBoard[nextRow][nextCol] === opponent) {
+            line.push([nextRow, nextCol]);
+            nextRow += rowDirection;
+            nextCol += colDirection;
+          }
+
+          if (line.length && isInsideBoard(nextRow, nextCol) && targetBoard[nextRow][nextCol] === piece) {
+            flips.push(...line);
+          }
+        });
+
+        return flips;
+      }
+
+      function getLegalMoves(targetBoard, piece) {
+        const moves = [];
+
+        for (let row = 0; row < boardSize; row += 1) {
+          for (let col = 0; col < boardSize; col += 1) {
+            const flips = getFlipsForMove(targetBoard, row, col, piece);
+
+            if (flips.length) {
+              moves.push({ row, col, flips });
+            }
+          }
+        }
+
+        return moves;
+      }
+
+      function applyMove(targetBoard, move, piece) {
+        const nextBoard = targetBoard.map((row) => [...row]);
+        nextBoard[move.row][move.col] = piece;
+
+        move.flips.forEach(([row, col]) => {
+          nextBoard[row][col] = piece;
+        });
+
+        return nextBoard;
+      }
+
+      function countPieces(targetBoard) {
+        return targetBoard.flat().reduce(
+          (counts, piece) => {
+            if (piece === "white") {
+              counts.white += 1;
+            }
+
+            if (piece === "pink") {
+              counts.pink += 1;
+            }
+
+            return counts;
+          },
+          { white: 0, pink: 0 },
+        );
+      }
+
+      function hideResultPopout() {
+        window.clearTimeout(resultTimeoutId);
+        resultTitle.textContent = "";
+        resultScore.textContent = "";
+        resultPopout.className = "result-popout";
+        resultPopout.setAttribute("aria-hidden", "true");
+      }
+
+      function showResultPopout(resultClass, title, score) {
+        window.clearTimeout(resultTimeoutId);
+        resultTitle.textContent = title;
+        resultScore.textContent = score;
+        resultPopout.className = `result-popout show ${resultClass}`;
+        resultPopout.setAttribute("aria-hidden", "false");
+
+        resultTimeoutId = window.setTimeout(hideResultPopout, 3600);
+      }
+
+      function evaluateMove(move) {
+        const nextBoard = applyMove(board, move, aiPiece);
+        const aiMoves = getLegalMoves(nextBoard, aiPiece).length;
+        const userMoves = getLegalMoves(nextBoard, userPiece).length;
+
+        return squareWeights[move.row][move.col] + move.flips.length * 8 + aiMoves * 3 - userMoves * 4;
+      }
+
+      function chooseAiMove() {
+        const moves = getLegalMoves(board, aiPiece);
+
+        return moves.reduce((bestMove, move) => {
+          if (!bestMove || evaluateMove(move) > evaluateMove(bestMove)) {
+            return move;
+          }
+
+          return bestMove;
+        }, null);
+      }
+
+      function renderBoard() {
+        const legalMoves = othelloActive && currentPlayer === userPiece ? getLegalMoves(board, userPiece) : [];
+        const legalKeys = new Set(legalMoves.map((move) => `${move.row}-${move.col}`));
+        const counts = countPieces(board);
+
+        whiteCount.textContent = counts.white;
+        pinkCount.textContent = counts.pink;
+        kanokoPanel.classList.toggle("active", othelloActive && currentPlayer === aiPiece);
+        userPanel.classList.toggle("active", othelloActive && currentPlayer === userPiece);
+        kanokoTurn.textContent = othelloActive && currentPlayer === aiPiece ? "かのこの番" : "待機中";
+        userTurn.textContent = othelloActive && currentPlayer === userPiece ? "あなたの番" : othelloActive ? "待機中" : "未開始";
+        othelloBoard.innerHTML = "";
+
+        for (let row = 0; row < boardSize; row += 1) {
+          for (let col = 0; col < boardSize; col += 1) {
+            const cell = document.createElement("button");
+            const piece = board[row][col];
+            const isLegal = legalKeys.has(`${row}-${col}`);
+
+            cell.className = `othello-cell${piece ? ` ${piece}` : ""}${isLegal ? " legal" : ""}`;
+            cell.type = "button";
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            cell.disabled = !othelloActive || currentPlayer !== userPiece || aiThinking || !isLegal;
+            cell.setAttribute("aria-label", `${row + 1}行${col + 1}列`);
+            othelloBoard.append(cell);
+          }
+        }
+      }
+
+      function finishGame() {
+        const counts = countPieces(board);
+        let resultClass = "draw";
+        let title = "引き分け！";
+        let score = `白 ${counts.white} - ピンク ${counts.pink}`;
+        let fruitMessageText = "ピンクの実10個が戻りました。";
+
+        currentPlayer = empty;
+
+        if (counts.white > counts.pink) {
+          resultClass = "lose";
+          title = "かのこの勝ち！";
+          fruitMessageText = "ピンクの実10個を失いました。";
+        } else if (counts.pink > counts.white) {
+          resultClass = "win";
+          title = "あなたの勝ち！";
+          score = `ピンク ${counts.pink} - 白 ${counts.white}`;
+        }
+
+        if (resultClass !== "lose" && othelloStakeInPlay) {
+          changeFruitBalance(othelloCost);
+        }
+
+        othelloActive = false;
+        othelloStakeInPlay = false;
+        renderBoard();
+        updateFruitDisplays();
+        gameMessage.textContent = fruitMessageText;
+        showResultPopout(resultClass, title, `${score} / ${fruitMessageText}`);
+      }
+
+      function continueTurn() {
+        const userMoves = getLegalMoves(board, userPiece);
+        const aiMoves = getLegalMoves(board, aiPiece);
+
+        if (!userMoves.length && !aiMoves.length) {
+          finishGame();
+          return;
+        }
+
+        if (currentPlayer === userPiece && !userMoves.length) {
+          currentPlayer = aiPiece;
+          gameMessage.textContent = "あなたは置ける場所がないので、かのこの番です。";
+          renderBoard();
+          window.setTimeout(playAiTurn, 700);
+          return;
+        }
+
+        if (currentPlayer === aiPiece && !aiMoves.length) {
+          currentPlayer = userPiece;
+          gameMessage.textContent = "かのこは置ける場所がないので、あなたの番です。";
+          renderBoard();
+          return;
+        }
+
+        if (currentPlayer === userPiece) {
+          gameMessage.textContent = "あなたの番です！";
+          renderBoard();
+          return;
+        }
+
+        gameMessage.textContent = "かのこが考えています。";
+        renderBoard();
+        window.setTimeout(playAiTurn, 700);
+      }
+
+      function playUserMove(row, col) {
+        if (currentPlayer !== userPiece || aiThinking) {
+          return;
+        }
+
+        const flips = getFlipsForMove(board, row, col, userPiece);
+
+        if (!flips.length) {
+          return;
+        }
+
+        board = applyMove(board, { row, col, flips }, userPiece);
+        currentPlayer = aiPiece;
+        continueTurn();
+      }
+
+      function playAiTurn() {
+        if (currentPlayer !== aiPiece) {
+          return;
+        }
+
+        aiThinking = true;
+        const move = chooseAiMove();
+
+        if (move) {
+          board = applyMove(board, move, aiPiece);
+        }
+
+        aiThinking = false;
+        currentPlayer = userPiece;
+        continueTurn();
+      }
+
+      function setupOthelloBoard() {
+        board = createEmptyBoard();
+        board[3][3] = aiPiece;
+        board[3][4] = userPiece;
+        board[4][3] = userPiece;
+        board[4][4] = aiPiece;
+        currentPlayer = userPiece;
+        aiThinking = false;
+        hideResultPopout();
+        renderBoard();
+      }
+
+      function startOthelloGame() {
+        if (othelloActive) {
+          return;
+        }
+
+        if (fruitBalance < othelloCost) {
+          gameMessage.textContent = "ピンクの実が10個必要です。";
+          return;
+        }
+
+        changeFruitBalance(-othelloCost);
+        othelloActive = true;
+        othelloStakeInPlay = true;
+        setupOthelloBoard();
+        gameMessage.textContent = "あなたの番です！";
+        updateFruitDisplays();
+      }
+
+      function resetGame() {
+        if (othelloStakeInPlay) {
+          changeFruitBalance(othelloCost);
+        }
+
+        othelloActive = false;
+        othelloStakeInPlay = false;
+        setupOthelloBoard();
+        gameMessage.textContent = "ピンクの実を10個使って対戦できます。";
+        updateFruitDisplays();
+      }
+
+      othelloBoard.addEventListener("click", (event) => {
+        const cell = event.target.closest(".othello-cell");
+
+        if (!cell) {
+          return;
+        }
+
+        playUserMove(Number(cell.dataset.row), Number(cell.dataset.col));
+      });
+
+      startJumpGameButton.addEventListener("click", startJumpGame);
+      jumpField.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
+        jumpPlayerAction();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === " " || event.key === "ArrowUp") {
+          event.preventDefault();
+          jumpPlayerAction();
+        }
+      });
+      startOthelloButton.addEventListener("click", startOthelloGame);
+      resetButton.addEventListener("click", resetGame);
+
+      loadFruitBalance();
+      prepareJumpStage();
+      resetGame();
+    </script>
   </body>
 </html>
